@@ -7,11 +7,11 @@ import { addAppointment, findPatientByPhone } from '../utils/database'
 export default function AppointmentForm() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', date: '', time: '', service: '', message: '' })
   const [status, setStatus] = useState('idle')
-  const [returning, setReturning] = useState(null) // patient object if returning
+  const [returning, setReturning] = useState(null)
 
-  const handlePhoneBlur = useCallback(() => {
+  const handlePhoneBlur = useCallback(async () => {
     if (!form.phone || form.phone.replace(/\s/g, '').length < 10) return
-    const patient = findPatientByPhone(form.phone)
+    const patient = await findPatientByPhone(form.phone)
     if (patient) {
       setReturning(patient)
       setForm(prev => ({ ...prev, name: prev.name || patient.name, email: prev.email || patient.email }))
@@ -20,11 +20,11 @@ export default function AppointmentForm() {
     }
   }, [form.phone])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('loading')
-    addAppointment(form)
-    setTimeout(() => setStatus('success'), 1200)
+    await addAppointment(form)
+    setStatus('success')
   }
 
   const resetForm = () => {
@@ -51,8 +51,7 @@ export default function AppointmentForm() {
           <p className="text-gray-500 dark:text-gray-400">
             {returning
               ? `Welcome back, ${form.name}! We'll confirm shortly. (Visit #${returning.visitCount + 1})`
-              : "We'll confirm your appointment via phone or WhatsApp shortly."
-            }
+              : "We'll confirm your appointment via phone or WhatsApp shortly."}
           </p>
           <button onClick={resetForm} className="mt-6 px-6 py-2 bg-primary text-white rounded-xl font-medium text-sm hover:bg-primary-dark transition-colors">
             Book Another
@@ -68,7 +67,6 @@ export default function AppointmentForm() {
         >
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Book Your Appointment</h3>
 
-          {/* Returning patient badge */}
           <AnimatePresence>
             {returning && (
               <motion.div

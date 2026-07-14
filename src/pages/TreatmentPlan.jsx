@@ -1,18 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Save, Printer, Trash2, CheckCircle, Clock, AlertCircle } from 'lucide-react'
+import { ArrowLeft, Printer, Trash2, CheckCircle, Clock, AlertCircle } from 'lucide-react'
 import DentalChart, { SERVICE_COLORS, TOOTH_NAMES } from '../components/DentalChart'
 import {
   getAllAppointments, getTreatmentPlan, updateTreatmentPlan,
   updateToothStatus, clearTreatmentPlan,
 } from '../utils/database'
-
-const STATUS_OPTIONS = [
-  { value: 'planned', label: 'Planned', icon: Clock, color: 'text-amber-500 bg-amber-100 dark:bg-amber-900/20' },
-  { value: 'in-progress', label: 'In Progress', icon: AlertCircle, color: 'text-blue-500 bg-blue-100 dark:bg-blue-900/20' },
-  { value: 'completed', label: 'Completed', icon: CheckCircle, color: 'text-green-500 bg-green-100 dark:bg-green-900/20' },
-]
 
 export default function TreatmentPlan() {
   const { id } = useParams()
@@ -20,39 +14,33 @@ export default function TreatmentPlan() {
   const [appointment, setAppointment] = useState(null)
   const [plan, setPlan] = useState({})
   const [selectedTooth, setSelectedTooth] = useState(null)
-  const [notes, setNotes] = useState('')
 
   useEffect(() => {
-    const all = getAllAppointments()
-    const appt = all.find(a => a.id === Number(id))
-    if (appt) {
-      setAppointment(appt)
-      setPlan(getTreatmentPlan(Number(id)))
+    const load = async () => {
+      const all = await getAllAppointments()
+      const appt = all.find(a => a.id === id || String(a.id) === String(id))
+      if (appt) {
+        setAppointment(appt)
+        setPlan(await getTreatmentPlan(appt.id))
+      }
     }
+    load()
   }, [id])
 
-  const handleToothSelect = (tooth, service) => {
-    const updated = updateTreatmentPlan(Number(id), tooth, service)
+  const handleToothSelect = async (tooth, service) => {
+    const updated = await updateTreatmentPlan(appointment.id, tooth, service)
     setPlan({ ...updated })
     setSelectedTooth(tooth)
-    setNotes(updated[tooth]?.notes || '')
   }
 
-  const handleSaveNotes = () => {
-    if (selectedTooth && plan[selectedTooth]) {
-      const updated = updateTreatmentPlan(Number(id), selectedTooth, plan[selectedTooth].service, notes)
-      setPlan({ ...updated })
-    }
+  const handleStatusChange = async (tooth, status) => {
+    await updateToothStatus(appointment.id, tooth, status)
+    setPlan(await getTreatmentPlan(appointment.id))
   }
 
-  const handleStatusChange = (tooth, status) => {
-    updateToothStatus(Number(id), tooth, status)
-    setPlan({ ...getTreatmentPlan(Number(id)) })
-  }
-
-  const handleClearAll = () => {
+  const handleClearAll = async () => {
     if (confirm('Clear entire treatment plan for this patient?')) {
-      clearTreatmentPlan(Number(id))
+      await clearTreatmentPlan(appointment.id)
       setPlan({})
     }
   }
@@ -103,7 +91,7 @@ export default function TreatmentPlan() {
             <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.phone}</p>
           </div>
           <div className="glass-card rounded-2xl p-4">
-            <p className="text-xs text-gray-400 mb-1">Primary Service</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Primary Service</p>
             <p className="font-semibold text-primary">{appointment.service}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.date} {appointment.time}</p>
           </div>
@@ -165,7 +153,7 @@ export default function TreatmentPlan() {
                             updated[tooth] = { ...updated[tooth], notes: e.target.value }
                             setPlan(updated)
                           }}
-                          onBlur={() => updateTreatmentPlan(Number(id), tooth, plan[tooth].service, plan[tooth].notes)}
+                          onBlur={() => updateTreatmentPlan(appointment.id, tooth, plan[tooth].service, plan[tooth].notes)}
                           placeholder="Add notes..."
                           className="w-full bg-transparent text-sm text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-1 focus:ring-primary/30 rounded px-2 py-1"
                         />
@@ -199,7 +187,7 @@ export default function TreatmentPlan() {
         {treatedTeeth.length === 0 && (
           <div className="glass-card rounded-2xl p-12 text-center">
             <p className="text-gray-400 dark:text-gray-500 text-lg mb-2">No treatments mapped yet</p>
-            <p className="text-gray-500 text-sm">Click any tooth on the chart above to assign a treatment.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">Click any tooth on the chart above to assign a treatment.</p>
           </div>
         )}
       </div>

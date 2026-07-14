@@ -22,16 +22,16 @@ export default function Admin() {
   const [stats, setStats] = useState(null)
   const [selected, setSelected] = useState(null)
   const [filter, setFilter] = useState('all')
-  const [tab, setTab] = useState('appointments') // appointments | patients
+  const [tab, setTab] = useState('appointments')
   const [notifications, setNotifications] = useState([])
   const [showNotifs, setShowNotifs] = useState(false)
   const [soundEnabled, setSoundEnabled] = useState(true)
-  const [patientHistory, setPatientHistory] = useState(null) // { patient, visits }
+  const [patientHistory, setPatientHistory] = useState(null)
   const prevCountRef = useRef(0)
   const notifAudio = useRef(null)
 
-  const refresh = () => {
-    const all = getAllAppointments()
+  const refresh = async () => {
+    const all = await getAllAppointments()
     const newCount = all.length
     if (prevCountRef.current > 0 && newCount > prevCountRef.current) {
       const newOnes = all.slice(0, newCount - prevCountRef.current)
@@ -48,8 +48,8 @@ export default function Admin() {
     }
     prevCountRef.current = newCount
     setAppointments(all)
-    setPatients(getAllPatients())
-    setStats(getStats())
+    setPatients(await getAllPatients())
+    setStats(await getStats())
   }
 
   useEffect(() => { refresh() }, [])
@@ -59,12 +59,12 @@ export default function Admin() {
   const unreadCount = notifications.filter(n => !n.read).length
   const markAllRead = () => setNotifications(prev => prev.map(n => ({ ...n, read: true })))
   const clearNotifications = () => { setNotifications([]); setShowNotifs(false) }
-  const handleStatus = (id, status) => { updateAppointmentStatus(id, status); refresh() }
-  const handleDelete = (id) => { if (confirm('Delete this appointment?')) { deleteAppointment(id); refresh() } }
+  const handleStatus = async (id, status) => { await updateAppointmentStatus(id, status); refresh() }
+  const handleDelete = async (id) => { if (confirm('Delete this appointment?')) { await deleteAppointment(id); refresh() } }
 
-  const openPatientHistory = (patientId) => {
-    const patient = getPatientById(patientId)
-    if (patient) setPatientHistory({ patient, visits: getPatientHistory(patientId) })
+  const openPatientHistory = async (patientId) => {
+    const patient = await getPatientById(patientId)
+    if (patient) setPatientHistory({ patient, visits: await getPatientHistory(patientId) })
   }
 
   const filtered = filter === 'all' ? appointments : appointments.filter(a => a.status === filter)

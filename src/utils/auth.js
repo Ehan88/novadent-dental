@@ -1,5 +1,5 @@
 const AUTH_KEY = 'novadent_staff_auth'
-const PW_KEY = 'novadent_staff_pw'
+const PW_KEY = 'novadent_staff_pw_v2'
 
 // Default staff password — change this on first login
 const DEFAULT_PW = 'DDDD'
