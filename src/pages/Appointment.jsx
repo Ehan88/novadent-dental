@@ -70,7 +70,7 @@ export default function Appointment() {
                     <c.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400 mb-0.5">{c.label}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mb-0.5">{c.label}</p>
                     <p className="font-semibold text-gray-900 dark:text-white text-sm">{c.value}</p>
                   </div>
                 </a>

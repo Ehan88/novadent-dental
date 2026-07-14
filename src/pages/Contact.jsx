@@ -92,7 +92,7 @@ export default function Contact() {
       </section>
 
       {/* Hours + FAQ */}
-      <section className="py-20 lg:py-28 bg-gray-50/50 dark:bg-white/[0.02]">
+      <section className="py-20 lg:py-28 bg-gray-50/50/80 dark:bg-white/[0.04]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>

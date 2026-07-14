@@ -21,7 +21,7 @@ export default function DoctorCard({ doctor }) {
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{doctor.name}</h3>
         <p className="text-primary font-medium text-sm mb-1">{doctor.specialty}</p>
-        <p className="text-gray-400 text-xs mb-3 flex items-center gap-1"><Award className="w-3 h-3" />{doctor.qualification}</p>
+        <p className="text-gray-400 dark:text-gray-500 text-xs mb-3 flex items-center gap-1"><Award className="w-3 h-3" />{doctor.qualification}</p>
         <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{doctor.bio}</p>
       </div>
     </motion.div>

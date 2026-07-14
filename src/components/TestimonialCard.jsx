@@ -17,7 +17,7 @@ export default function TestimonialCard({ testimonial }) {
       <div className="flex items-center justify-between pt-3 border-t border-gray-200/50 dark:border-white/5">
         <div>
           <p className="font-semibold text-gray-900 dark:text-white text-sm">{testimonial.name}</p>
-          <p className="text-xs text-gray-400">{testimonial.treatment}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">{testimonial.treatment}</p>
         </div>
       </div>
     </motion.div>

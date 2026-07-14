@@ -29,9 +29,10 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('darkMode') === 'true'
+      const stored = localStorage.getItem('darkMode')
+      return stored !== null ? stored === 'true' : true
     }
-    return false
+    return true
   })
 
   useEffect(() => {
@@ -42,8 +43,12 @@ function App() {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark')
+      document.documentElement.classList.remove('light-mode')
+      document.body.classList.remove('light-mode')
     } else {
       document.documentElement.classList.remove('dark')
+      document.documentElement.classList.add('light-mode')
+      document.body.classList.add('light-mode')
     }
     localStorage.setItem('darkMode', darkMode)
   }, [darkMode])

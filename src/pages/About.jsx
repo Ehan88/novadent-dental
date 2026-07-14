@@ -68,7 +68,7 @@ export default function About() {
       </section>
 
       {/* Mission */}
-      <section className="py-20 bg-gray-50/50 dark:bg-white/[0.02]">
+      <section className="py-20 bg-gray-50/50/80 dark:bg-white/[0.04]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <div className="max-w-3xl mx-auto">
@@ -103,7 +103,7 @@ export default function About() {
       </section>
 
       {/* Technology */}
-      <section className="py-20 lg:py-28 bg-gray-50/50 dark:bg-white/[0.02]">
+      <section className="py-20 lg:py-28 bg-gray-50/50/80 dark:bg-white/[0.04]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Our Technology" title="State-of-the-Art Equipment" description="We invest in the latest dental technology to ensure the best outcomes for our patients." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

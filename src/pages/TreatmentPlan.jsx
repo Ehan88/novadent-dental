@@ -98,21 +98,21 @@ export default function TreatmentPlan() {
         {/* Patient Info + Stats */}
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="glass-card rounded-2xl p-4">
-            <p className="text-xs text-gray-400 mb-1">Patient</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Patient</p>
             <p className="font-semibold text-gray-900 dark:text-white">{appointment.name}</p>
-            <p className="text-xs text-gray-500">{appointment.phone}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.phone}</p>
           </div>
           <div className="glass-card rounded-2xl p-4">
             <p className="text-xs text-gray-400 mb-1">Primary Service</p>
             <p className="font-semibold text-primary">{appointment.service}</p>
-            <p className="text-xs text-gray-500">{appointment.date} {appointment.time}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.date} {appointment.time}</p>
           </div>
           <div className="glass-card rounded-2xl p-4">
-            <p className="text-xs text-gray-400 mb-1">Teeth Mapped</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Teeth Mapped</p>
             <p className="text-2xl font-bold text-gray-900 dark:text-white">{treatedTeeth.length}</p>
           </div>
           <div className="glass-card rounded-2xl p-4">
-            <p className="text-xs text-gray-400 mb-1">Treatment Status</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Treatment Status</p>
             <div className="flex gap-2 mt-1">
               <span className="text-xs font-medium text-amber-600">{plannedCount} planned</span>
               <span className="text-xs font-medium text-blue-600">{inProgressCount} active</span>
@@ -198,7 +198,7 @@ export default function TreatmentPlan() {
 
         {treatedTeeth.length === 0 && (
           <div className="glass-card rounded-2xl p-12 text-center">
-            <p className="text-gray-400 text-lg mb-2">No treatments mapped yet</p>
+            <p className="text-gray-400 dark:text-gray-500 text-lg mb-2">No treatments mapped yet</p>
             <p className="text-gray-500 text-sm">Click any tooth on the chart above to assign a treatment.</p>
           </div>
         )}

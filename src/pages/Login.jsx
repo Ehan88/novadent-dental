@@ -99,7 +99,7 @@ export default function Login() {
 
           <div className="mt-4 pt-4 border-t border-gray-200/50 dark:border-white/5 text-center">
             <p className="text-xs text-gray-400">
-              Default password: <code className="bg-gray-100 dark:bg-white/5 px-1.5 py-0.5 rounded font-mono">!!Han@2008</code>
+              Staff access only. Contact clinic admin for credentials.
             </p>
           </div>
         </div>

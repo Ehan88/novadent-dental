@@ -17,7 +17,7 @@ export default function ServiceCard({ service }) {
       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{service.title}</h3>
       <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">{service.description}</p>
       <div className="flex items-center justify-between pt-3 border-t border-gray-200/50 dark:border-white/5">
-        <span className="flex items-center gap-1 text-xs text-gray-400"><Clock className="w-3.5 h-3.5" />{service.duration}</span>
+        <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500"><Clock className="w-3.5 h-3.5" />{service.duration}</span>
         <span className="flex items-center gap-0.5 text-sm font-semibold text-primary">{service.price}</span>
       </div>
     </motion.div>

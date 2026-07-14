@@ -38,7 +38,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-28 bg-gray-50/50 dark:bg-white/[0.02]">
+      <section className="py-20 lg:py-28 bg-gray-50/50/80 dark:bg-white/[0.04]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="How It Works" title="Our Treatment Process" description="A simple three-step process to get you the care you need." />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
