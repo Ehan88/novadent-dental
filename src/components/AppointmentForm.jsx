@@ -33,7 +33,7 @@ export default function AppointmentForm() {
     setStatus('idle')
   }
 
-  const inputClass = 'w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm'
+  const inputClass = 'w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800 border border-gray-200 dark:border-slate-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm'
 
   return (
     <AnimatePresence mode="wait">
