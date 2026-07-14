@@ -99,7 +99,7 @@ export default function Login() {
 
           <div className="mt-4 pt-4 border-t border-gray-200/50 dark:border-white/5 text-center">
             <p className="text-xs text-gray-400">
-              Staff access only. Contact clinic admin for credentials.
+              Authorized staff only.
             </p>
           </div>
         </div>
