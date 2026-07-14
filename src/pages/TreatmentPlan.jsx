@@ -86,12 +86,12 @@ export default function TreatmentPlan() {
         {/* Patient Info + Stats */}
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="glass-card rounded-2xl p-4">
-            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Patient</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Patient Name</p>
             <p className="font-semibold text-gray-900 dark:text-white">{appointment.name}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.phone}</p>
           </div>
           <div className="glass-card rounded-2xl p-4">
-            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Primary Service</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Service</p>
             <p className="font-semibold text-primary">{appointment.service}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">{appointment.date} {appointment.time}</p>
           </div>
