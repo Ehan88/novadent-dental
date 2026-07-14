@@ -2,7 +2,7 @@ const AUTH_KEY = 'novadent_staff_auth'
 const PW_KEY = 'novadent_staff_pw'
 
 // Default staff password — change this on first login
-const DEFAULT_PW = '!!Han@2008'
+const DEFAULT_PW = 'DDDD'
 
 export function getStaffPassword() {
   return localStorage.getItem(PW_KEY) || DEFAULT_PW
